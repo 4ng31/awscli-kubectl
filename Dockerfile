@@ -22,7 +22,7 @@ RUN apk --no-cache add binutils curl jq \
     && rm glibc-bin-${GLIBC_VER}.apk \
     && rm -rf /var/cache/apk/*
 
-RUN aws --version   
+RUN /usr/local/bin/aws --version   
 
 #Install kubectl
 RUN curl --silent -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/local/bin/kubectl \
