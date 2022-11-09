@@ -2,7 +2,7 @@ FROM alpine:3.16.2
 
 MAINTAINER Angel Cancio <angel.cancio@gmail.com>
 
-RUN apk --no-cache add binutils curl gcompat jq \
+RUN apk --no-cache add binutils curl jq \
     && GLIBC_VER=$(curl -s https://api.github.com/repos/sgerrand/alpine-pkg-glibc/releases/latest | jq -r '.tag_name') \
     && curl -sL https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub \
     && curl -sLO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VER}/glibc-${GLIBC_VER}.apk \
