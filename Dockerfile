@@ -26,7 +26,7 @@ RUN apk --no-cache add binutils curl jq \
 #Install kubectl
 RUN curl --silent -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/local/bin/kubectl \
     && chmod +x /usr/local/bin/kubectl \
-    && apk --no-cache del curl 
+    && apk --no-cache del curl \
     && apk --no-cache del binutils curl jq \
     && rm -rf /var/cache/apk/* \
     && rm -rf /tmp/*
