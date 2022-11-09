@@ -2,6 +2,8 @@ FROM alpine:3.16.2
 
 MAINTAINER Angel Cancio <angel.cancio@gmail.com>
 
+WORKDIR /builds
+
 RUN apk --no-cache add binutils curl jq \
     && GLIBC_VER=$(curl -s https://api.github.com/repos/sgerrand/alpine-pkg-glibc/releases/latest | jq -r '.tag_name') \
     && curl -sL https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub \
@@ -10,7 +12,7 @@ RUN apk --no-cache add binutils curl jq \
     && apk add --no-cache \
     glibc-${GLIBC_VER}.apk \
     glibc-bin-${GLIBC_VER}.apk \
-    && curl -sL https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip \
+    && curl -L https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip \
     && unzip awscliv2.zip \
     && aws/install \
     && rm -rf \
@@ -23,7 +25,7 @@ RUN apk --no-cache add binutils curl jq \
     && rm -rf /var/cache/apk/*
 
 #Install kubectl
-RUN curl --silent -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/bin/kubectl \
+RUN curl -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/bin/kubectl \
     && chmod +x /usr/bin/kubectl \
     && apk --no-cache del curl \
     && apk --no-cache del binutils curl jq \
