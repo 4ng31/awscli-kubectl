@@ -15,7 +15,6 @@ RUN apk --no-cache add binutils curl jq \
     && aws/install \
     && rm -rf \
         awscliv2.zip \
-        aws \
         /usr/local/aws-cli/v2/*/dist/aws_completer \
         /usr/local/aws-cli/v2/*/dist/awscli/data/ac.index \
         /usr/local/aws-cli/v2/*/dist/awscli/examples \
@@ -24,8 +23,8 @@ RUN apk --no-cache add binutils curl jq \
     && rm -rf /var/cache/apk/*
 
 #Install kubectl
-RUN curl --silent -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/local/bin/kubectl \
-    && chmod +x /usr/local/bin/kubectl \
+RUN curl --silent -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/bin/kubectl \
+    && chmod +x /usr/bin/kubectl \
     && apk --no-cache del curl \
     && apk --no-cache del binutils curl jq \
     && rm -rf /var/cache/apk/* \
