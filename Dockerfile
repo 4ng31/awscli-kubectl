@@ -10,5 +10,5 @@ RUN curl -sL "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/s
     && rm -rf /tmp/*
 
 RUN aws --version
-RUN kubectl version
+RUN kubectl version --client=true --output=json |jq '.clientVersion.gitVersion'
 
